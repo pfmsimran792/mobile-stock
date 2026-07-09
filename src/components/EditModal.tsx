@@ -6,7 +6,7 @@ interface EditModalProps {
   productName: string;
   currentStock: number;
   onClose: () => void;
-  onSave: (stock: number) => void;
+  onSave: (quantity: number) => void;
 }
 
 function EditModal({
@@ -16,19 +16,19 @@ function EditModal({
   onClose,
   onSave,
 }: EditModalProps) {
-  const [stock, setStock] = useState("");
+  const [quantity, setQuantity] = useState("");
 
   useEffect(() => {
     if (isOpen) {
-      setStock(currentStock.toString());
+      setQuantity("");
     }
-  }, [isOpen, currentStock]);
+  }, [isOpen]);
 
   function handleSave() {
-    const value = Number(stock);
+    const value = Number(quantity);
 
-    if (value < 0) {
-      alert("Stock cannot be negative.");
+    if (value <= 0) {
+      alert("Please enter a valid quantity.");
       return;
     }
 
@@ -39,18 +39,22 @@ function EditModal({
   return (
     <Modal
       isOpen={isOpen}
-      title="Edit Product"
+      title="Add Stock"
       onClose={onClose}
     >
       <p className="mb-2 font-semibold">{productName}</p>
 
+      <p className="text-gray-600 mb-4">
+        Current Stock: <strong>{currentStock}</strong>
+      </p>
+
       <input
         type="number"
-        min="0"
-        value={stock}
-        onChange={(e) => setStock(e.target.value)}
+        min="1"
+        value={quantity}
+        onChange={(e) => setQuantity(e.target.value)}
         className="w-full border rounded-lg p-3"
-        placeholder="Enter stock"
+        placeholder="Enter new stock received"
       />
 
       <div className="flex justify-end gap-3 mt-5">
@@ -65,7 +69,7 @@ function EditModal({
           onClick={handleSave}
           className="bg-blue-600 text-white px-4 py-2 rounded-lg"
         >
-          Save
+          Add Stock
         </button>
       </div>
     </Modal>

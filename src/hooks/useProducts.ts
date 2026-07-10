@@ -31,6 +31,19 @@ export function useProducts() {
       },
     ]);
   };
+const addStock = (id: string, quantity: number) => {
+  setProducts((prev) =>
+    prev.map((product) =>
+      product.id === id
+        ? {
+            ...product,
+            stock: product.stock + quantity,
+          }
+        : product
+    )
+  );
+};
+
 
   const updateStock = (id: string, stock: number) => {
     setProducts((prev) =>
@@ -151,6 +164,7 @@ export function useProducts() {
   setSort,
 
   addProduct,
+  addStock,
   updateStock,
   sellProduct,
   deleteProduct,

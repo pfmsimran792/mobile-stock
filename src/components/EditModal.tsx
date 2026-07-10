@@ -24,17 +24,17 @@ function EditModal({
     }
   }, [isOpen]);
 
-  function handleSave() {
-    const value = Number(quantity);
+function handleSave() {
+  const value = Number(quantity);
 
-    if (value <= 0) {
-      alert("Please enter a valid quantity.");
-      return;
-    }
-
-    onSave(value);
-    onClose();
+  if (value <= 0) {
+    alert("Please enter a valid quantity.");
+    return;
   }
+
+  onSave(value);
+  onClose();
+}
 
   return (
     <Modal

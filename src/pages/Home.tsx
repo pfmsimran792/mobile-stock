@@ -23,9 +23,9 @@ function Home() {
     sort,
     setSort,
     addProduct,
+    addStock,
     deleteProduct,
     sellProduct,
-    updateStock,
     replaceProducts,
     totalProducts,
     totalStock,
@@ -189,14 +189,16 @@ function Home() {
         }}
       />
 
-      <EditModal
-        isOpen={editModalOpen}
-        productName={editProductName}
-        currentStock={editCurrentStock}
-        onClose={() => setEditModalOpen(false)}
-        onSave={(stock) => {
-          updateStock(editProductId, stock);
-        }}
+<EditModal
+  isOpen={editModalOpen}
+  productName={editProductName}
+  currentStock={editCurrentStock}
+  onClose={() => setEditModalOpen(false)}
+  onSave={(quantity) => {
+    addStock(editProductId, quantity);
+  }}
+
+
       />
 
       <DeleteModal
